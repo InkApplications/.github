@@ -1,0 +1,22 @@
+name: KMP Checks
+on:
+    workflow_call:
+        inputs:
+            java-version:
+                required: false
+jobs:
+    check:
+        runs-on: ubuntu-latest
+        steps:
+        -
+            name: Checkout
+            uses: actions/checkout@v4.1.7
+        -
+            name: Configure Java
+            uses: actions/setup-java@v4.2.1
+            with:
+            java-version: ${{ inputs.java-version }}
+            distribution: temurin
+        -
+            name: Tests
+            run: ./gradlew check
