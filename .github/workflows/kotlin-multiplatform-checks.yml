@@ -3,7 +3,9 @@ on:
     workflow_call:
         inputs:
             java-version:
+                type: string
                 required: false
+                default: 17
 jobs:
     check:
         runs-on: ubuntu-latest
