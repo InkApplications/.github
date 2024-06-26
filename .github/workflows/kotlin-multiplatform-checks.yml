@@ -17,8 +17,8 @@ jobs:
             name: Configure Java
             uses: actions/setup-java@v4.2.1
             with:
-            java-version: ${{ inputs.java-version }}
-            distribution: temurin
+                java-version: ${{ inputs.java-version }}
+                distribution: temurin
         -
             name: Tests
             run: ./gradlew check
