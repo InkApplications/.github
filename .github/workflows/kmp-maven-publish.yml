@@ -9,96 +9,119 @@ on:
 
             publish-android:
                 description: 'Publish Android Release'
+                type: boolean
                 required: false
                 default: false
 
             publish-linux-x64:
                 description: 'Publish Linux X64'
+                type: boolean
                 required: false
                 default: true
             publish-linux-arm64:
                 description: 'Publish Linux Arm64'
+                type: boolean
                 required: false
                 default: true
             publish-android-native-arm32:
                 description: 'Publish Android Native Arm32'
+                type: boolean
                 required: false
                 default: true
             publish-android-native-arm64:
                 description: 'Publish Android Native Arm64'
+                type: boolean
                 required: false
                 default: true
             publish-android-native-x86:
                 description: 'Publish Android Native X86'
+                type: boolean
                 required: false
                 default: true
             publish-android-native-x64:
                 description: 'Publish Android Native X64'
+                type: boolean
                 required: false
                 default: true
             publish-js:
                 description: 'Publish JavaScript'
+                type: boolean
                 required: false
                 default: true
             publish-jvm:
                 description: 'Publish JVM'
+                type: boolean
                 required: false
                 default: true
             publish-mingw-x64:
                 description: 'Publish Mingw X64'
+                type: boolean
                 required: false
                 default: true
 
             publish-macos-x64:
                 description: 'Publish MacOS X64'
+                type: boolean
                 required: false
                 default: true
             publish-macos-arm64:
                 description: 'Publish MacOS Arm64'
+                type: boolean
                 required: false
                 default: true
             publish-ios-simulator-arm64:
                 description: 'Publish iOS Simulator Arm64'
+                type: boolean
                 required: false
                 default: true
             publish-ios-x64:
                 description: 'Publish iOS X64'
+                type: boolean
                 required: false
                 default: true
             publish-watchos-simulator-arm64:
                 description: 'Publish WatchOS Simulator Arm64'
+                type: boolean
                 required: false
                 default: true
             publish-watchos-x64:
                 description: 'Publish WatchOS X64'
+                type: boolean
                 required: false
                 default: true
             publish-watchos-arm32:
                 description: 'Publish WatchOS Arm32'
+                type: boolean
                 required: false
                 default: true
             publish-watchos-arm64:
                 description: 'Publish WatchOS Arm64'
+                type: boolean
                 required: false
                 default: true
             publish-tvos-simulator-arm64:
                 description: 'Publish TVOS Simulator Arm64'
+                type: boolean
                 required: false
                 default: true
             publish-tvos-x64:
                 description: 'Publish TVOS X64'
+                type: boolean
                 required: false
                 default: true
             publish-tvos-arm64:
                 description: 'Publish TVOS Arm64'
+                type: boolean
                 required: false
                 default: true
             publish-ios-arm64:
                 description: 'Publish iOS Arm64'
+                type: boolean
                 required: false
                 default: true
             publish-watchos-device-arm64:
                 description: 'Publish WatchOS Device Arm64'
+                type: boolean
                 required: false
                 default: true
 
