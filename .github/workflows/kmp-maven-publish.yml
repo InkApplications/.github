@@ -1,0 +1,190 @@
+name: KMP Library Release
+on:
+    workflow_call:
+        inputs:
+            version:
+                description: The version name to use in compilation.
+                type: string
+                required: true
+
+            publishAndroid:
+                description: 'Publish Android Release'
+                required: false
+                default: false
+
+            publishLinuxX64:
+                description: 'Publish Linux X64'
+                required: false
+                default: true
+            publishLinuxArm64:
+                description: 'Publish Linux Arm64'
+                required: false
+                default: true
+            publishAndroidNativeArm32:
+                description: 'Publish Android Native Arm32'
+                required: false
+                default: true
+            publishAndroidNativeArm64:
+                description: 'Publish Android Native Arm64'
+                required: false
+                default: true
+            publishAndroidNativeX86:
+                description: 'Publish Android Native X86'
+                required: false
+                default: true
+            publishAndroidNativeX64:
+                description: 'Publish Android Native X64'
+                required: false
+                default: true
+            publishJs:
+                description: 'Publish JavaScript'
+                required: false
+                default: true
+            publishJvm:
+                description: 'Publish JVM'
+                required: false
+                default: true
+            publishMingwX64:
+                description: 'Publish Mingw X64'
+                required: false
+                default: true
+
+            java-version:
+                description: 'Java version to setup'
+                required: true
+            version:
+                description: 'Version to publish'
+                required: true
+            publishMacosX64:
+                description: 'Publish MacOS X64'
+                required: false
+                default: true
+            publishMacosArm64:
+                description: 'Publish MacOS Arm64'
+                required: false
+                default: true
+            publishIosSimulatorArm64:
+                description: 'Publish iOS Simulator Arm64'
+                required: false
+                default: true
+            publishIosX64:
+                description: 'Publish iOS X64'
+                required: false
+                default: true
+            publishWatchosSimulatorArm64:
+                description: 'Publish WatchOS Simulator Arm64'
+                required: false
+                default: true
+            publishWatchosX64:
+                description: 'Publish WatchOS X64'
+                required: false
+                default: true
+            publishWatchosArm32:
+                description: 'Publish WatchOS Arm32'
+                required: false
+                default: true
+            publishWatchosArm64:
+                description: 'Publish WatchOS Arm64'
+                required: false
+                default: true
+            publishTvosSimulatorArm64:
+                description: 'Publish TVOS Simulator Arm64'
+                required: false
+                default: true
+            publishTvosX64:
+                description: 'Publish TVOS X64'
+                required: false
+                default: true
+            publishTvosArm64:
+                description: 'Publish TVOS Arm64'
+                required: false
+                default: true
+            publishIosArm64:
+                description: 'Publish iOS Arm64'
+                required: false
+                default: true
+            publishWatchosDeviceArm64:
+                description: 'Publish WatchOS Device Arm64'
+                required: false
+                default: true
+
+            java-version:
+                type: string
+                required: false
+                default: 17
+env:
+    GITHUB_TAG: ${{ github.ref }}
+jobs:
+    linux:
+        runs-on: ubuntu-latest
+        needs: [tests]
+        steps:
+            -
+                name: Checkout
+                uses: actions/checkout@v4.1.7
+            -
+                name: Configure Java
+                uses: actions/setup-java@v4.2.1
+                with:
+                    java-version: ${{ inputs.java-version }}
+                    distribution: temurin
+            -
+                name: Maven Publish
+                env:
+                    ORG_GRADLE_PROJECT_mavenUser: ${{ secrets.MAVEN_CENTRAL_USERNAME }}
+                    ORG_GRADLE_PROJECT_mavenPassword: ${{ secrets.MAVEN_CENTRAL_PASSWORD }}
+                    ORG_GRADLE_PROJECT_signingKeyId: ${{ secrets.PGP_INK_CI_KEYID }}
+                    ORG_GRADLE_PROJECT_signingKey: ${{ secrets.PGP_INK_CI_PRIVATE }}
+                    ORG_GRADLE_PROJECT_signingPassword: ${{ secrets.PGP_INK_CI_PASSWORD }}
+                run: >
+                    ./gradlew
+                    publishKotlinMultiplatformPublicationToMavenCentralRepository
+                    ${{ inputs.publishLinuxX64 && 'publishLinuxX64PublicationToMavenCentralRepository' || '' }}
+                    ${{ inputs.publishLinuxArm64 && 'publishLinuxArm64PublicationToMavenCentralRepository' || '' }}
+                    ${{ inputs.publishAndroid && 'publishAndroidReleasePublicationToMavenCentralRepository' || '' }}
+                    ${{ inputs.publishAndroid && 'publishAndroidDebugPublicationToMavenCentralRepository' || '' }}
+                    ${{ inputs.publishAndroidNativeArm32 && 'publishAndroidNativeArm32PublicationToMavenCentralRepository' || '' }}
+                    ${{ inputs.publishAndroidNativeArm64 && 'publishAndroidNativeArm64PublicationToMavenCentralRepository' || '' }}
+                    ${{ inputs.publishAndroidNativeX86 && 'publishAndroidNativeX86PublicationToMavenCentralRepository' || '' }}
+                    ${{ inputs.publishAndroidNativeX64 && 'publishAndroidNativeX64PublicationToMavenCentralRepository' || '' }}
+                    ${{ inputs.publishJs && 'publishJsPublicationToMavenCentralRepository' || '' }}
+                    ${{ inputs.publishJvm && 'publishJvmPublicationToMavenCentralRepository' || '' }}
+                    ${{ inputs.publishMingwX64 && 'publishMingwX64PublicationToMavenCentralRepository' || '' }}
+                    -Pversion=${{ inputs.version }}
+    macos:
+        runs-on: macos-latest
+        needs: [tests]
+        steps:
+            -
+                name: Checkout
+                uses: actions/checkout@v4.1.7
+            -
+                name: Configure Java
+                uses: actions/setup-java@v4.2.1
+                with:
+                    java-version: ${{ inputs.java-version }}
+                    distribution: temurin
+            -
+                name: Maven Publish
+                env:
+                    ORG_GRADLE_PROJECT_mavenUser: ${{ secrets.MAVEN_CENTRAL_USERNAME }}
+                    ORG_GRADLE_PROJECT_mavenPassword: ${{ secrets.MAVEN_CENTRAL_PASSWORD }}
+                    ORG_GRADLE_PROJECT_signingKeyId: ${{ secrets.PGP_INK_CI_KEYID }}
+                    ORG_GRADLE_PROJECT_signingKey: ${{ secrets.PGP_INK_CI_PRIVATE }}
+                    ORG_GRADLE_PROJECT_signingPassword: ${{ secrets.PGP_INK_CI_PASSWORD }}
+                run: >
+                    ./gradlew
+                    ${{ inputs.publishMacosX64 && 'publishMacosX64PublicationToMavenCentralRepository' || '' }}
+                    ${{ inputs.publishMacosArm64 && 'publishMacosArm64PublicationToMavenCentralRepository' || '' }}
+                    ${{ inputs.publishIosSimulatorArm64 && 'publishIosSimulatorArm64PublicationToMavenCentralRepository' || '' }}
+                    ${{ inputs.publishIosX64 && 'publishIosX64PublicationToMavenCentralRepository' || '' }}
+                    ${{ inputs.publishWatchosSimulatorArm64 && 'publishWatchosSimulatorArm64PublicationToMavenCentralRepository' || '' }}
+                    ${{ inputs.publishWatchosX64 && 'publishWatchosX64PublicationToMavenCentralRepository' || '' }}
+                    ${{ inputs.publishWatchosArm32 && 'publishWatchosArm32PublicationToMavenCentralRepository' || '' }}
+                    ${{ inputs.publishWatchosArm64 && 'publishWatchosArm64PublicationToMavenCentralRepository' || '' }}
+                    ${{ inputs.publishTvosSimulatorArm64 && 'publishTvosSimulatorArm64PublicationToMavenCentralRepository' || '' }}
+                    ${{ inputs.publishTvosX64 && 'publishTvosX64PublicationToMavenCentralRepository' || '' }}
+                    ${{ inputs.publishTvosArm64 && 'publishTvosArm64PublicationToMavenCentralRepository' || '' }}
+                    ${{ inputs.publishIosArm64 && 'publishIosArm64PublicationToMavenCentralRepository' || '' }}
+                    ${{ inputs.publishWatchosDeviceArm64 && 'publishWatchosDeviceArm64PublicationToMavenCentralRepository' || '' }}
+                    -Pversion=${{ inputs.version }}
