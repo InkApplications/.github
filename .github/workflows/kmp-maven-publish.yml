@@ -129,12 +129,9 @@ on:
                 type: string
                 required: false
                 default: 17
-env:
-    GITHUB_TAG: ${{ github.ref }}
 jobs:
     linux:
         runs-on: ubuntu-latest
-        needs: [tests]
         steps:
             -
                 name: Checkout
@@ -170,7 +167,6 @@ jobs:
                     -Pversion=${{ inputs.version }}
     macos:
         runs-on: macos-latest
-        needs: [tests]
         steps:
             -
                 name: Checkout
