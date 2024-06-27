@@ -7,103 +7,97 @@ on:
                 type: string
                 required: true
 
-            publishAndroid:
+            publish-android:
                 description: 'Publish Android Release'
                 required: false
                 default: false
 
-            publishLinuxX64:
+            publish-linux-x64:
                 description: 'Publish Linux X64'
                 required: false
                 default: true
-            publishLinuxArm64:
+            publish-linux-arm64:
                 description: 'Publish Linux Arm64'
                 required: false
                 default: true
-            publishAndroidNativeArm32:
+            publish-android-native-arm32:
                 description: 'Publish Android Native Arm32'
                 required: false
                 default: true
-            publishAndroidNativeArm64:
+            publish-android-native-arm64:
                 description: 'Publish Android Native Arm64'
                 required: false
                 default: true
-            publishAndroidNativeX86:
+            publish-android-native-x86:
                 description: 'Publish Android Native X86'
                 required: false
                 default: true
-            publishAndroidNativeX64:
+            publish-android-native-x64:
                 description: 'Publish Android Native X64'
                 required: false
                 default: true
-            publishJs:
+            publish-js:
                 description: 'Publish JavaScript'
                 required: false
                 default: true
-            publishJvm:
+            publish-jvm:
                 description: 'Publish JVM'
                 required: false
                 default: true
-            publishMingwX64:
+            publish-mingw-x64:
                 description: 'Publish Mingw X64'
                 required: false
                 default: true
 
-            java-version:
-                description: 'Java version to setup'
-                required: true
-            version:
-                description: 'Version to publish'
-                required: true
-            publishMacosX64:
+            publish-macos-x64:
                 description: 'Publish MacOS X64'
                 required: false
                 default: true
-            publishMacosArm64:
+            publish-macos-arm64:
                 description: 'Publish MacOS Arm64'
                 required: false
                 default: true
-            publishIosSimulatorArm64:
+            publish-ios-simulator-arm64:
                 description: 'Publish iOS Simulator Arm64'
                 required: false
                 default: true
-            publishIosX64:
+            publish-ios-x64:
                 description: 'Publish iOS X64'
                 required: false
                 default: true
-            publishWatchosSimulatorArm64:
+            publish-watchos-simulator-arm64:
                 description: 'Publish WatchOS Simulator Arm64'
                 required: false
                 default: true
-            publishWatchosX64:
+            publish-watchos-x64:
                 description: 'Publish WatchOS X64'
                 required: false
                 default: true
-            publishWatchosArm32:
+            publish-watchos-arm32:
                 description: 'Publish WatchOS Arm32'
                 required: false
                 default: true
-            publishWatchosArm64:
+            publish-watchos-arm64:
                 description: 'Publish WatchOS Arm64'
                 required: false
                 default: true
-            publishTvosSimulatorArm64:
+            publish-tvos-simulator-arm64:
                 description: 'Publish TVOS Simulator Arm64'
                 required: false
                 default: true
-            publishTvosX64:
+            publish-tvos-x64:
                 description: 'Publish TVOS X64'
                 required: false
                 default: true
-            publishTvosArm64:
+            publish-tvos-arm64:
                 description: 'Publish TVOS Arm64'
                 required: false
                 default: true
-            publishIosArm64:
+            publish-ios-arm64:
                 description: 'Publish iOS Arm64'
                 required: false
                 default: true
-            publishWatchosDeviceArm64:
+            publish-watchos-device-arm64:
                 description: 'Publish WatchOS Device Arm64'
                 required: false
                 default: true
@@ -139,17 +133,17 @@ jobs:
                 run: >
                     ./gradlew
                     publishKotlinMultiplatformPublicationToMavenCentralRepository
-                    ${{ inputs.publishLinuxX64 && 'publishLinuxX64PublicationToMavenCentralRepository' || '' }}
-                    ${{ inputs.publishLinuxArm64 && 'publishLinuxArm64PublicationToMavenCentralRepository' || '' }}
-                    ${{ inputs.publishAndroid && 'publishAndroidReleasePublicationToMavenCentralRepository' || '' }}
-                    ${{ inputs.publishAndroid && 'publishAndroidDebugPublicationToMavenCentralRepository' || '' }}
-                    ${{ inputs.publishAndroidNativeArm32 && 'publishAndroidNativeArm32PublicationToMavenCentralRepository' || '' }}
-                    ${{ inputs.publishAndroidNativeArm64 && 'publishAndroidNativeArm64PublicationToMavenCentralRepository' || '' }}
-                    ${{ inputs.publishAndroidNativeX86 && 'publishAndroidNativeX86PublicationToMavenCentralRepository' || '' }}
-                    ${{ inputs.publishAndroidNativeX64 && 'publishAndroidNativeX64PublicationToMavenCentralRepository' || '' }}
-                    ${{ inputs.publishJs && 'publishJsPublicationToMavenCentralRepository' || '' }}
-                    ${{ inputs.publishJvm && 'publishJvmPublicationToMavenCentralRepository' || '' }}
-                    ${{ inputs.publishMingwX64 && 'publishMingwX64PublicationToMavenCentralRepository' || '' }}
+                    ${{ inputs.publish-linux-x64 && 'publishLinuxX64PublicationToMavenCentralRepository' || '' }}
+                    ${{ inputs.publish-linux-arm64 && 'publishLinuxArm64PublicationToMavenCentralRepository' || '' }}
+                    ${{ inputs.publish-android && 'publishAndroidReleasePublicationToMavenCentralRepository' || '' }}
+                    ${{ inputs.publish-android && 'publishAndroidDebugPublicationToMavenCentralRepository' || '' }}
+                    ${{ inputs.publish-android-native-arm32 && 'publishAndroidNativeArm32PublicationToMavenCentralRepository' || '' }}
+                    ${{ inputs.publish-android-native-arm64 && 'publishAndroidNativeArm64PublicationToMavenCentralRepository' || '' }}
+                    ${{ inputs.publish-android-native-x86 && 'publishAndroidNativeX86PublicationToMavenCentralRepository' || '' }}
+                    ${{ inputs.publish-android-native-x64 && 'publishAndroidNativeX64PublicationToMavenCentralRepository' || '' }}
+                    ${{ inputs.publish-js && 'publishJsPublicationToMavenCentralRepository' || '' }}
+                    ${{ inputs.publish-jvm && 'publishJvmPublicationToMavenCentralRepository' || '' }}
+                    ${{ inputs.publish-mingw-x64 && 'publishMingwX64PublicationToMavenCentralRepository' || '' }}
                     -Pversion=${{ inputs.version }}
     macos:
         runs-on: macos-latest
@@ -174,17 +168,17 @@ jobs:
                     ORG_GRADLE_PROJECT_signingPassword: ${{ secrets.PGP_INK_CI_PASSWORD }}
                 run: >
                     ./gradlew
-                    ${{ inputs.publishMacosX64 && 'publishMacosX64PublicationToMavenCentralRepository' || '' }}
-                    ${{ inputs.publishMacosArm64 && 'publishMacosArm64PublicationToMavenCentralRepository' || '' }}
-                    ${{ inputs.publishIosSimulatorArm64 && 'publishIosSimulatorArm64PublicationToMavenCentralRepository' || '' }}
-                    ${{ inputs.publishIosX64 && 'publishIosX64PublicationToMavenCentralRepository' || '' }}
-                    ${{ inputs.publishWatchosSimulatorArm64 && 'publishWatchosSimulatorArm64PublicationToMavenCentralRepository' || '' }}
-                    ${{ inputs.publishWatchosX64 && 'publishWatchosX64PublicationToMavenCentralRepository' || '' }}
-                    ${{ inputs.publishWatchosArm32 && 'publishWatchosArm32PublicationToMavenCentralRepository' || '' }}
-                    ${{ inputs.publishWatchosArm64 && 'publishWatchosArm64PublicationToMavenCentralRepository' || '' }}
-                    ${{ inputs.publishTvosSimulatorArm64 && 'publishTvosSimulatorArm64PublicationToMavenCentralRepository' || '' }}
-                    ${{ inputs.publishTvosX64 && 'publishTvosX64PublicationToMavenCentralRepository' || '' }}
-                    ${{ inputs.publishTvosArm64 && 'publishTvosArm64PublicationToMavenCentralRepository' || '' }}
-                    ${{ inputs.publishIosArm64 && 'publishIosArm64PublicationToMavenCentralRepository' || '' }}
-                    ${{ inputs.publishWatchosDeviceArm64 && 'publishWatchosDeviceArm64PublicationToMavenCentralRepository' || '' }}
+                    ${{ inputs.publish-macos-x64 && 'publishMacosX64PublicationToMavenCentralRepository' || '' }}
+                    ${{ inputs.publish-macos-arm64 && 'publishMacosArm64PublicationToMavenCentralRepository' || '' }}
+                    ${{ inputs.publish-ios-simulator-arm64 && 'publishIosSimulatorArm64PublicationToMavenCentralRepository' || '' }}
+                    ${{ inputs.publish-ios-x64 && 'publishIosX64PublicationToMavenCentralRepository' || '' }}
+                    ${{ inputs.publish-watchos-simulator-arm64 && 'publishWatchosSimulatorArm64PublicationToMavenCentralRepository' || '' }}
+                    ${{ inputs.publish-watchos-x64 && 'publishWatchosX64PublicationToMavenCentralRepository' || '' }}
+                    ${{ inputs.publish-watchos-arm32 && 'publishWatchosArm32PublicationToMavenCentralRepository' || '' }}
+                    ${{ inputs.publish-watchos-arm64 && 'publishWatchosArm64PublicationToMavenCentralRepository' || '' }}
+                    ${{ inputs.publish-tvos-simulator-arm64 && 'publishTvosSimulatorArm64PublicationToMavenCentralRepository' || '' }}
+                    ${{ inputs.publish-tvos-x64 && 'publishTvosX64PublicationToMavenCentralRepository' || '' }}
+                    ${{ inputs.publish-tvos-arm64 && 'publishTvosArm64PublicationToMavenCentralRepository' || '' }}
+                    ${{ inputs.publish-ios-arm64 && 'publishIosArm64PublicationToMavenCentralRepository' || '' }}
+                    ${{ inputs.publish-watchos-device-arm64 && 'publishWatchosDeviceArm64PublicationToMavenCentralRepository' || '' }}
                     -Pversion=${{ inputs.version }}
