@@ -129,6 +129,11 @@ on:
                 type: string
                 required: false
                 default: 17
+
+            draft-release:
+                type: boolean
+                required: false
+                default: true
 jobs:
     linux:
         runs-on: ubuntu-latest
@@ -201,3 +206,26 @@ jobs:
                     ${{ inputs.publish-ios-arm64 && 'publishIosArm64PublicationToMavenCentralRepository' || '' }}
                     ${{ inputs.publish-watchos-device-arm64 && 'publishWatchosDeviceArm64PublicationToMavenCentralRepository' || '' }}
                     -Pversion=${{ inputs.version }}
+    draft-release:
+        if: ${{ inputs.draft-release }}
+        name: Draft Github Release
+        runs-on: ubuntu-latest
+        steps:
+            -
+                name: Checkout
+                uses: actions/checkout@v4.1.7
+            -
+                name: Prepare Changelog Text
+                run: mkdir -p build && sed '1,/---/d' CHANGELOG.md | awk '/---/{exit}1' | sed '$d' > build/RELEASE.md
+            -
+                name: Create Release
+                id: create_release
+                uses: actions/create-release@v1.1.4
+                env:
+                      GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+                with:
+                      tag_name: ${{ github.ref }}
+                      release_name: ${{ github.ref_name }}
+                      draft: true
+                      prerelease: false
+                      body_path: build/RELEASE.md
