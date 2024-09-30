@@ -140,7 +140,7 @@ jobs:
         steps:
             -
                 name: Checkout
-                uses: actions/checkout@v4.1.7
+                uses: actions/checkout@v4.2.0
             -
                 name: Configure Java
                 uses: actions/setup-java@v4.2.1
@@ -175,7 +175,7 @@ jobs:
         steps:
             -
                 name: Checkout
-                uses: actions/checkout@v4.1.7
+                uses: actions/checkout@v4.2.0
             -
                 name: Configure Java
                 uses: actions/setup-java@v4.2.1
@@ -213,7 +213,7 @@ jobs:
         steps:
             -
                 name: Checkout
-                uses: actions/checkout@v4.1.7
+                uses: actions/checkout@v4.2.0
             -
                 name: Prepare Changelog Text
                 run: mkdir -p build && sed '1,/---/d' CHANGELOG.md | awk '/---/{exit}1' | sed '$d' > build/RELEASE.md
