@@ -157,7 +157,7 @@ jobs:
                     ORG_GRADLE_PROJECT_signingPassword: ${{ secrets.PGP_INK_CI_PASSWORD }}
                 run: >
                     ./gradlew
-                    publishKotlinMultiplatformPublicationToMavenCentralRepository
+                    publishKotlinMultiplatformPublicationToMavenCentralRepository --no-daemon --no-parallel
                     ${{ inputs.publish-linux-x64 && 'publishLinuxX64PublicationToMavenCentralRepository' || '' }}
                     ${{ inputs.publish-linux-arm64 && 'publishLinuxArm64PublicationToMavenCentralRepository' || '' }}
                     ${{ inputs.publish-android && 'publishAndroidReleasePublicationToMavenCentralRepository' || '' }}
@@ -191,7 +191,7 @@ jobs:
                     ORG_GRADLE_PROJECT_signingKey: ${{ secrets.PGP_INK_CI_PRIVATE }}
                     ORG_GRADLE_PROJECT_signingPassword: ${{ secrets.PGP_INK_CI_PASSWORD }}
                 run: >
-                    ./gradlew
+                    ./gradlew --no-daemon --no-parallel
                     ${{ inputs.publish-macos-x64 && 'publishMacosX64PublicationToMavenCentralRepository' || '' }}
                     ${{ inputs.publish-macos-arm64 && 'publishMacosArm64PublicationToMavenCentralRepository' || '' }}
                     ${{ inputs.publish-ios-simulator-arm64 && 'publishIosSimulatorArm64PublicationToMavenCentralRepository' || '' }}
