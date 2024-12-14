@@ -20,5 +20,8 @@ jobs:
                 java-version: ${{ inputs.java-version }}
                 distribution: temurin
         -
+            name: Configure Gradle Wrapper
+            run: echo "GRADLEW_PATH=$(if [ -x ./gradlew ]; then echo './gradlew'; elif [ -x bin/gradlew ]; then echo 'bin/gradlew'; else echo 'gradlew not found'; exit 1; fi)" >> $GITHUB_ENV
+        -
             name: Tests
-            run: ./gradlew check
+            run: $GRADLEW_PATH check
