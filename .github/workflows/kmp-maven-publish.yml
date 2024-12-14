@@ -148,6 +148,9 @@ jobs:
                     java-version: ${{ inputs.java-version }}
                     distribution: temurin
             -
+                name: Configure Gradle Wrapper
+                run: echo "GRADLEW_PATH=$(if [ -x ./gradlew ]; then echo './gradlew'; elif [ -x bin/gradlew ]; then echo 'bin/gradlew'; else echo 'gradlew not found'; exit 1; fi)" >> $GITHUB_ENV
+            -
                 name: Maven Publish
                 env:
                     ORG_GRADLE_PROJECT_mavenUser: ${{ secrets.MAVEN_CENTRAL_USERNAME }}
@@ -156,7 +159,7 @@ jobs:
                     ORG_GRADLE_PROJECT_signingKey: ${{ secrets.PGP_INK_CI_PRIVATE }}
                     ORG_GRADLE_PROJECT_signingPassword: ${{ secrets.PGP_INK_CI_PASSWORD }}
                 run: >
-                    ./gradlew
+                    $GRADLEW_PATH
                     publishKotlinMultiplatformPublicationToMavenCentralRepository --no-daemon --no-parallel
                     ${{ inputs.publish-linux-x64 && 'publishLinuxX64PublicationToMavenCentralRepository' || '' }}
                     ${{ inputs.publish-linux-arm64 && 'publishLinuxArm64PublicationToMavenCentralRepository' || '' }}
@@ -183,6 +186,9 @@ jobs:
                     java-version: ${{ inputs.java-version }}
                     distribution: temurin
             -
+                name: Configure Gradle Wrapper
+                run: echo "GRADLEW_PATH=$(if [ -x ./gradlew ]; then echo './gradlew'; elif [ -x bin/gradlew ]; then echo 'bin/gradlew'; else echo 'gradlew not found'; exit 1; fi)" >> $GITHUB_ENV
+            -
                 name: Maven Publish
                 env:
                     ORG_GRADLE_PROJECT_mavenUser: ${{ secrets.MAVEN_CENTRAL_USERNAME }}
@@ -191,7 +197,7 @@ jobs:
                     ORG_GRADLE_PROJECT_signingKey: ${{ secrets.PGP_INK_CI_PRIVATE }}
                     ORG_GRADLE_PROJECT_signingPassword: ${{ secrets.PGP_INK_CI_PASSWORD }}
                 run: >
-                    ./gradlew --no-daemon --no-parallel
+                    $GRADLEW_PATH --no-daemon --no-parallel
                     ${{ inputs.publish-macos-x64 && 'publishMacosX64PublicationToMavenCentralRepository' || '' }}
                     ${{ inputs.publish-macos-arm64 && 'publishMacosArm64PublicationToMavenCentralRepository' || '' }}
                     ${{ inputs.publish-ios-simulator-arm64 && 'publishIosSimulatorArm64PublicationToMavenCentralRepository' || '' }}
