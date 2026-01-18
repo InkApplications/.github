@@ -130,6 +130,11 @@ on:
                 required: false
                 default: 17
 
+            java-distribution:
+                type: string
+                required: false
+                default: temurin
+
             draft-release:
                 type: boolean
                 required: false
@@ -146,7 +151,7 @@ jobs:
                 uses: actions/setup-java@f2beeb24e141e01a676f977032f5a29d81c9e27e
                 with:
                     java-version: ${{ inputs.java-version }}
-                    distribution: temurin
+                    distribution: ${{ inputs.java-distribution }}
             -
                 name: Configure Gradle Wrapper
                 run: echo "GRADLEW_PATH=$(if [ -x ./gradlew ]; then echo './gradlew'; elif [ -x bin/gradlew ]; then echo 'bin/gradlew'; else echo 'gradlew not found'; exit 1; fi)" >> $GITHUB_ENV
@@ -184,7 +189,7 @@ jobs:
                 uses: actions/setup-java@f2beeb24e141e01a676f977032f5a29d81c9e27e
                 with:
                     java-version: ${{ inputs.java-version }}
-                    distribution: temurin
+                    distribution: ${{ inputs.java-distribution }}
             -
                 name: Configure Gradle Wrapper
                 run: echo "GRADLEW_PATH=$(if [ -x ./gradlew ]; then echo './gradlew'; elif [ -x bin/gradlew ]; then echo 'bin/gradlew'; else echo 'gradlew not found'; exit 1; fi)" >> $GITHUB_ENV
